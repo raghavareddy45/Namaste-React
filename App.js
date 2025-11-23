@@ -1,10 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-// const header=React.createElement("h1",{
-//     id:"header",
-//     class:"Main _ header"
-// },"Haii Using React");
-const header=<h1>From Jsx</h1>;
+//Functional Component is a noraml js function that returns jsx/react componenet
+const Title=()=>(
+    <h1>It is a title</h1>
+);
+
+const HeadingComponent=()=>(
+    <div>
+        <Title/>
+        <h2>From Heading Componet</h2>
+    </div>
+)
+
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(header);
+root.render(<HeadingComponent/>);
