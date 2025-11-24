@@ -1,17 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-//Functional Component is a noraml js function that returns jsx/react componenet
-const Title=()=>(
-    <h1>It is a title</h1>
+const Header=()=>{
+    return(
+        <div className="header-container">
+            <div className="logo-container">
+                <img className="logo" src="../images/zent-logo-png-car-22.png" alt="Zent logo"></img>
+            </div>
+            <div className="nav-items">
+                <ul>
+                    <li>Home</li>
+                    <li>About Us</li>
+                    <li>Contact Us</li>
+                    <li>Cart</li>
+                </ul>
+            </div>
+        </div>
+    );
+}
+
+const AppLayout=()=>(
+    <Header/>
 );
-
-const HeadingComponent=()=>(
-    <div>
-        <Title/>
-        <h2>From Heading Componet</h2>
-    </div>
-)
-
 const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(<HeadingComponent/>);
+root.render(<AppLayout/>);
