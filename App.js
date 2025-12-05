@@ -17,13 +17,205 @@ const Header=()=>{
         </div>
     );
 }
-const ResCard=()=>{
+
+
+const resList= [
+    {
+      id: "378344",
+      name: "Theobroma",
+      cloudinaryImageId: "63dd75492c47fcec191132b8eb299ea5",
+      locality: "Banjara Hills",
+      areaName: "Banjara Hills",
+      costForTwo: "₹400 for two",
+      cuisines: ["Desserts"],
+      avgRating: 4.5,
+      totalRatingsString: "3.5K+",
+      sla: {
+        deliveryTime: 33,
+        slaString: "30-35 mins",
+        lastMileTravelString: "6.3 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "15% OFF",
+      },
+    },
+    {
+      id: "378345",
+      name: "Paradise Biryani",
+      cloudinaryImageId: "8e8a1e724f6a4fabc9ee3b8ac3549b2b",
+      locality: "Hitec City",
+      areaName: "Hitec City",
+      costForTwo: "₹600 for two",
+      cuisines: ["Biryani", "North Indian"],
+      avgRating: 4.2,
+      totalRatingsString: "5K+",
+      sla: {
+        deliveryTime: 25,
+        slaString: "25-30 mins",
+        lastMileTravelString: "5 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+      },
+    },
+    {
+      id: "378346",
+      name: "Burger King",
+      cloudinaryImageId: "9a6e7e8a9f4a4142b9d4353d8b1e7e5c",
+      locality: "Madhapur",
+      areaName: "Madhapur",
+      costForTwo: "₹350 for two",
+      cuisines: ["Fast Food", "Beverages"],
+      avgRating: 4.0,
+      totalRatingsString: "8K+",
+      sla: {
+        deliveryTime: 20,
+        slaString: "20-25 mins",
+        lastMileTravelString: "4.2 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "10% OFF",
+      },
+    },
+    {
+      id: "378347",
+      name: "Domino's Pizza",
+      cloudinaryImageId: "bc123a7a8b9e1234c567d78d90a1f2c8",
+      locality: "Kukatpally",
+      areaName: "Kukatpally",
+      costForTwo: "₹500 for two",
+      cuisines: ["Pizza", "Italian"],
+      avgRating: 4.3,
+      totalRatingsString: "10K+",
+      sla: {
+        deliveryTime: 30,
+        slaString: "30-35 mins",
+        lastMileTravelString: "6.0 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "25% OFF",
+      },
+    },
+    {
+      id: "378348",
+      name: "KFC",
+      cloudinaryImageId: "f1b32a6df5d64468a12e5e8db6c3a77e",
+      locality: "Gachibowli",
+      areaName: "Gachibowli",
+      costForTwo: "₹450 for two",
+      cuisines: ["Fast Food", "Chicken"],
+      avgRating: 4.1,
+      totalRatingsString: "6K+",
+      sla: {
+        deliveryTime: 28,
+        slaString: "25-30 mins",
+        lastMileTravelString: "5.5 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "30% OFF",
+      },
+    },
+    {
+      id: "378349",
+      name: "Subway",
+      cloudinaryImageId: "9ef2347cbfcf47239d3d2e231c7f3b7c",
+      locality: "Jubilee Hills",
+      areaName: "Jubilee Hills",
+      costForTwo: "₹300 for two",
+      cuisines: ["Healthy Food", "Sandwiches"],
+      avgRating: 4.4,
+      totalRatingsString: "3K+",
+      sla: {
+        deliveryTime: 22,
+        slaString: "20-25 mins",
+        lastMileTravelString: "3.8 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "15% OFF",
+      },
+    },
+    {
+      id: "378350",
+      name: "Pizza Hut",
+      cloudinaryImageId: "ad9ab1234789cd8efaa123c5673a123b",
+      locality: "Manikonda",
+      areaName: "Manikonda",
+      costForTwo: "₹500 for two",
+      cuisines: ["Pizza", "Italian"],
+      avgRating: 4.0,
+      totalRatingsString: "7K+",
+      sla: {
+        deliveryTime: 30,
+        slaString: "25-30 mins",
+        lastMileTravelString: "5.7 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+      },
+    },
+    {
+      id: "378351",
+      name: "Pista House",
+      cloudinaryImageId: "3c4f3cd89b473b12edcd5673b2c9adfc",
+      locality: "Charminar",
+      areaName: "Charminar",
+      costForTwo: "₹600 for two",
+      cuisines: ["Biryani", "North Indian", "Hyderabadi"],
+      avgRating: 4.6,
+      totalRatingsString: "12K+",
+      sla: {
+        deliveryTime: 35,
+        slaString: "30-35 mins",
+        lastMileTravelString: "7.0 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "35% OFF",
+      },
+    },
+    {
+      id: "378352",
+      name: "Barbeque Nation",
+      cloudinaryImageId: "3df123c89b456fdfb3ef123cd45678ab",
+      locality: "Kondapur",
+      areaName: "Kondapur",
+      costForTwo: "₹1200 for two",
+      cuisines: ["Barbecue", "North Indian", "Desserts"],
+      avgRating: 4.5,
+      totalRatingsString: "15K+",
+      sla: {
+        deliveryTime: 40,
+        slaString: "35-40 mins",
+        lastMileTravelString: "8.0 km",
+      },
+      isOpen: true,
+      aggregatedDiscountInfoV3: {
+        header: "20% OFF",
+      },
+    },
+  ];
+
+
+const ResCard=({resData})=>{
     return(
         <div className="res-card">
             <div className="img-container">
-                <img className="img" src="https://imgs.search.brave.com/fFHDmhyUDWc73oe6vif_XT22WVUcprB64XDbPpj8lfY/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly93d3cu/c2VyaW91c2VhdHMu/Y29tL3RobWIvbjdu/WDRMeng2cG5xNlRx/ZWF5NVNkYjNieTNJ/PS8xNTAweDAvZmls/dGVyczpub191cHNj/YWxlKCk6bWF4X2J5/dGVzKDE1MDAwMCk6/c3RyaXBfaWNjKCkv/X19vcHRfX2Fib3V0/Y29tX19jb2V1c19f/cmVzb3VyY2VzX19j/b250ZW50X21pZ3Jh/dGlvbl9fc2VyaW91/c19lYXRzX19zZXJp/b3VzZWF0cy5jb21f/XzIwMjBfXzA3X18y/MDIwMDcxNS1sYW1i/LWJpcnlhbmktbmlr/LXNoYXJtYS05LTI4/NWVkOTI0NzI1YTRj/YTU5OGMzNzJlMTlk/MzNiMzBkLmpwZw"></img>
+                <img
+                    className="img"
+                    src={
+                        "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" +
+                        resData.cloudinaryImageId
+                    }
+                    alt={resData.cloudinaryImageId}/>
             </div>
-            <h3>mehfil</h3>
+            <h3>{resData.name}</h3>
         </div>
     );
 }
@@ -32,10 +224,11 @@ const Body=()=>{
         <div className="body-container">
             <div className="search">search</div>
             <div className="res-list">
-                <ResCard/>
-                <ResCard/>
-                <ResCard/>
-                <ResCard/>
+                {
+                    resList.map((res)=>(
+                        <ResCard key={res.id}resData={res}/>
+                    ))
+                }
             </div>
         </div>
     );

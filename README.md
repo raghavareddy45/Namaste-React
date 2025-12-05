@@ -566,3 +566,324 @@ This is the real power of React — small reusable parts → big applications.
 ✔ Functional Components
 ✔ Class Components
 ✔ Component Composition
+
+EPISODE 4
+
+🏗 First App Structure
+
+We built a basic layout:
+
+Header
+
+Logo
+
+Nav list (Home, About, etc.)
+
+Body
+
+Search box
+
+Card container (list of restaurants)
+
+Individual restaurant cards
+
+Footer
+
+Some text / links
+
+In code, something like:
+
+const Header = () => (
+  <div className="header">
+    <div className="logo">Logo</div>
+    <ul className="nav-items">
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </div>
+);
+
+const Body = () => (
+  <div className="body">
+    <div className="search">Search</div>
+    <div className="res-list">
+      {/* Cards will come here */}
+    </div>
+  </div>
+);
+
+const Footer = () => (
+  <div className="footer">
+    <p>© 2025 Food App</p>
+  </div>
+);
+
+const AppLayout = () => (
+  <>
+    <Header />
+    <Body />
+    <Footer />
+  </>
+);
+
+
+This is the skeleton of your app.
+
+🧱 Container Composition
+
+Component Composition = building big UIs using small components.
+
+AppLayout contains Header, Body, and Footer.
+
+Body contains a list container, which contains cards.
+
+Cards are separate components that are reused.
+
+Example:
+
+const ResCard = ({ resData }) => (
+  <div className="res-card">
+    <h3>{resData.name}</h3>
+    <p>{resData.cuisines.join(", ")}</p>
+  </div>
+);
+
+const Body = () => (
+  <div className="res-list">
+    {resList.map((res) => (
+      <ResCard key={res.id} resData={res} />
+    ))}
+  </div>
+);
+
+
+👉 This is container composition:
+
+Body is a container component.
+
+ResCard is a child/presentational component.
+
+🧩 Modularity
+
+Modularity means splitting your UI and logic into small, reusable pieces.
+
+Why?
+
+Easy to read
+
+Easy to debug
+
+Easy to reuse
+
+Easy to test
+
+Example structure:
+
+src/
+  components/
+    Header.js
+    Body.js
+    Footer.js
+    ResCard.js
+  utils/
+    mockData.js
+  App.js
+
+
+Instead of writing everything in App.js, we modularize into small files.
+
+📦 Props (Properties)
+
+Props = data passed from parent to child.
+
+Think of it like function parameters.
+
+const ResCard = ({ resData }) => {
+  return (
+    <div className="res-card">
+      <h3>{resData.name}</h3>
+      <p>{resData.cuisines.join(", ")}</p>
+    </div>
+  );
+};
+
+// Parent
+<ResCard resData={resList[0]} />
+
+
+resData is a prop.
+
+ResCard does not own the data; it just displays it.
+
+Props make components reusable and dynamic.
+
+💉 Dynamic Data Injection
+
+Instead of hardcoding:
+
+<h3>Paradise Biryani</h3>
+
+
+We inject data dynamically:
+
+<h3>{resData.name}</h3>
+<p>{resData.costForTwo}</p>
+<p>{resData.avgRating} ⭐</p>
+
+
+Now the same ResCard component works for:
+
+Paradise
+
+KFC
+
+Domino’s
+
+Barbeque Nation
+…just based on the data you pass.
+
+That’s “dynamic data injection” using props.
+
+🔁 Using map to Render Multiple Cards
+
+You don’t manually write:
+
+<ResCard resData={resList[0]} />
+<ResCard resData={resList[1]} />
+<ResCard resData={resList[2]} />
+...
+
+
+You use .map():
+
+const Body = () => {
+  return (
+    <div className="res-list">
+      {resList.map((res) => (
+        <ResCard key={res.id} resData={res} />
+      ))}
+    </div>
+  );
+};
+
+
+.map() loops through resList.
+
+For each res, it returns a <ResCard />.
+
+This is how we generate UI from data.
+
+This is one of the most important patterns in React:
+Data → map → Components.
+
+🔑 What is key in React & Why is it Important?
+
+When you do:
+
+{resList.map((res) => (
+  <ResCard key={res.id} resData={res} />
+))}
+
+
+The key prop:
+
+Helps React identify each element uniquely.
+
+Used by React’s reconciliation algorithm (diffing).
+
+When the list changes (add/remove/reorder), React uses key to:
+
+Know which item is which
+
+Avoid re-rendering everything unnecessarily
+
+Update only what changed → better performance and fewer UI bugs
+
+You’ll often get this warning without key:
+
+Warning: Each child in a list should have a unique "key" prop.
+
+So, key is required whenever rendering lists.
+
+🚫 Why not use index as key?
+
+Example (not recommended):
+
+{resList.map((res, index) => (
+  <ResCard key={index} resData={res} />
+))}
+
+
+This seems fine, but causes issues when:
+
+The list order changes (sorting)
+
+You insert/delete an item in middle
+
+React thinks items with the same index are the “same” component
+
+Result:
+
+Wrong items may keep old state.
+
+Weird UI bugs: wrong data in wrong card, flickering, etc.
+
+👉 Using index as key is only somewhat okay when:
+
+List is static
+
+No add/remove/reorder
+
+No local state in children
+But as a good habit: avoid it.
+
+✅ What to Use as key Then?
+
+Use something that is unique and stable, like:
+
+id from your data → ✅ best
+
+{resList.map((res) => (
+  <ResCard key={res.id} resData={res} />
+))}
+
+
+If you don’t have an id, create one in your data.
+
+In your resList, you already have:
+
+id: "378345"
+
+
+Perfect for key.
+
+TL;DR – Quick Exam / Interview Style Notes 😄
+
+Structure: Header, Body, Footer → app layout.
+
+Component Composition: Big components contain smaller components.
+
+Modularity: Split code into multiple small components/files.
+
+Props: Data passed from parent → child. Makes components reusable & dynamic.
+
+Dynamic data injection: Use {} to render data like {resData.name} instead of hardcoding.
+
+map: Used to loop over an array and generate a list of components.
+
+key:
+
+Special prop for list items.
+
+Helps React track items between renders.
+
+Improves performance & prevents wrong updates.
+
+Don’t use index as key:
+
+Breaks when list changes (add/remove/reorder).
+
+Can cause bugs with component state.
+
+Use unique ids as key (like res.id).
