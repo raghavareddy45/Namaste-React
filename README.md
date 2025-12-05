@@ -363,3 +363,206 @@ Helps parcel & babel decide what to transpile
 ✔ Parcel usage
 ✔ Installing & Importing React
 ✔ Browserslist
+📘 React Notes — Episode 3
+package.json Scripts • JSX • Transpilation • Components
+🟦 1. package.json — Scripts Section
+
+package.json allows us to define scripts that we can run using npm.
+
+Example:
+
+{
+  "name": "react-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  }
+}
+
+⭐ What this means:
+start
+npm start
+
+
+Runs:
+
+parcel index.html
+
+
+Starts development server (auto refresh, HMR).
+
+build
+npm run build
+
+
+Runs:
+
+parcel build index.html
+
+
+Creates a production build:
+
+Minified
+
+Optimized
+
+Browser-compatible files
+
+🟦 2. Why we need scripts instead of typing commands manually?
+
+Before scripts, we used:
+
+npx parcel index.html
+
+
+After adding "start" script:
+
+npm start
+
+
+Benefits:
+
+Shorter commands
+
+Easy for teammates
+
+Works the same across all systems
+
+Used by deployment platforms
+
+🟦 3. What is JSX?
+
+JSX = JavaScript XML
+It allows us to write HTML-like code inside JavaScript.
+
+Example (JSX):
+const element = <h1>Hello React</h1>;
+
+JSX is NOT HTML
+
+Browser cannot understand JSX
+
+It must be transpiled to JavaScript
+
+🟦 4. How Transpilation Works
+
+Transpilation = converting JSX → pure JavaScript
+Parcel uses Babel under the hood.
+
+JSX Input:
+const element = <h1>Hello React</h1>;
+
+Babel Output:
+const element = React.createElement("h1", null, "Hello React");
+
+
+Then React converts the virtual DOM object → real DOM node.
+
+🟦 5. HTML vs JSX
+Feature	HTML	JSX
+Syntax	Pure HTML	HTML+JavaScript
+Can use dynamic values?	❌	✔️ { } expressions
+Browser understands?	✔️	❌ must be transpiled
+Styling	attributes	camelCase (className)
+Closes tags automatically?	✔️	❌ must close every tag
+Example Differences
+HTML:
+<div class="box"></div>
+
+JSX:
+<div className="box"></div>
+
+🟦 6. What is a React Component?
+
+A component is a reusable UI block.
+Think of it like a function that returns UI.
+
+React apps = multiple small components combined together.
+
+🟦 7. Types of Components
+
+There are 2 main types:
+
+⭐ A. Functional Component (Modern & Recommended)
+
+A functional component is just a JavaScript function returning JSX.
+
+Example:
+function Header() {
+  return <h1>This is a Functional Component</h1>;
+}
+
+
+Characteristics:
+
+Simple to write
+
+Uses hooks (useState, useEffect, etc.)
+
+Faster & clean
+
+⭐ B. Class Component (Older Method)
+
+Class components were used before hooks existed.
+
+Example:
+class Header extends React.Component {
+  render() {
+    return <h1>This is a Class Component</h1>;
+  }
+}
+
+
+Characteristics:
+
+Uses render() method
+
+Lifecycle methods (componentDidMount, etc.)
+
+More code, not recommended for new projects
+
+🟦 8. Component Composition
+
+Component Composition = Using one component inside another.
+
+This is how we build complex UIs from small pieces.
+
+Example:
+function Header() {
+  return <h1>Header Section</h1>;
+}
+
+function Body() {
+  return <p>This is the body</p>;
+}
+
+function App() {
+  return (
+    <div>
+      <Header />
+      <Body />
+    </div>
+  );
+}
+
+
+App is composed of:
+
+Header componentS
+
+Body component
+
+This is the real power of React — small reusable parts → big applications.
+
+🎉 Episode 3 Summary
+
+✔ package.json scripts (start, build)
+✔ Why npm start works
+✔ JSX
+✔ Transpilation process
+✔ HTML vs JSX
+✔ React Components
+✔ Functional Components
+✔ Class Components
+✔ Component Composition
