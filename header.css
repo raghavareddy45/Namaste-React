@@ -17,9 +17,11 @@ list-style-type: none;
 padding: 20px;
 margin: 10px;
 }
-.search{
-  padding-top: 30px;
-  padding-bottom: 30px;
+.flter-btn{
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: blanchedalmond;
 }
 .res-card{
   height: 300px;

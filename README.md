@@ -887,3 +887,247 @@ Breaks when list changes (add/remove/reorder).
 Can cause bugs with component state.
 
 Use unique ids as key (like res.id).
+
+
+Episode 5 – Component Architecture, Imports/Exports, Hooks & React Fiber
+🧩 1. Why use a different file for every component?
+
+React follows component-based architecture.
+
+✔ Each UI part (Header, Body, Footer, Card) → independent component
+✔ Easier to read
+✔ Easier to debug
+✔ Easier to reuse
+✔ Easier to test
+✔ Clean folder structure
+
+Example structure:
+
+src/
+  components/
+    Header.js
+    Body.js
+    Footer.js
+    ResCard.js
+  utils/
+    mockData.js
+  App.js
+
+
+If you keep everything in one file, it becomes:
+
+❌ Hard to maintain
+❌ Hard to find bugs
+❌ Hard to reuse
+❌ Messy code
+
+React = “Break UI into small LEGO blocks.”
+Each block goes in its own file.
+
+📄 2. JS vs JSX file extension
+JS (.js)
+
+Regular JavaScript file.
+
+JSX (.jsx)
+
+JSX = JavaScript + XML-like HTML syntax.
+
+You can write:
+
+return <h1>Hello React</h1>;
+
+
+Instead of:
+
+return React.createElement("h1", null, "Hello React");
+
+
+React apps support both .js and .jsx.
+JSX is not required, but helps clarity.
+
+🌟 Most devs use .js file with JSX inside (because React supports JSX inside .js).
+
+➡ If your project uses lots of React components → .jsx is more readable.
+
+🔗 3. Import & Export of Components
+✔ Default Export
+const Header = () => <h1>Logo</h1>;
+export default Header;
+
+
+Default export means:
+
+Only one default export per file.
+
+You import it without brackets.
+
+import Header from "./Header";
+
+
+✔ You can rename it:
+
+import MyHeader from "./Header";
+
+✔ Named Export
+export const Header = () => <h1>Logo</h1>;
+export const Footer = () => <h1>Footer</h1>;
+
+
+Import:
+
+import { Header, Footer } from "./HeaderFooter";
+
+
+❌ You cannot rename without alias:
+
+import { Header as Head } from "./HeaderFooter";
+
+🔍 Difference Between Default & Named Export
+Feature	Default Export	Named Export
+Count	1 per file	Many per file
+Import syntax	import X from ""	import { X } from ""
+Renaming	Easy	Needs as
+Use case	Main component	Utility functions, multiple components
+⚛ 4. React Hooks
+
+Hooks = Special functions that allow React components to manage:
+
+State
+
+Lifecycle
+
+Side effects
+
+Introduced in React 16.8.
+
+Hooks start with "use":
+
+useState
+
+useEffect
+
+useContext
+
+useReducer
+
+etc.
+
+🔋 5. useState Hook
+
+useState allows your component to remember values between renders.
+
+📌 Syntax
+const [stateVariable, setStateVariable] = useState(initialValue);
+
+Example
+const [count, setCount] = useState(0);
+
+
+Now:
+
+count = stores the value
+
+setCount = function to update the value
+
+🔁 How useState Works Internally
+
+React stores the state in memory (Fiber tree).
+
+When you call setCount(newValue):
+
+React marks the component as “needs update”.
+
+React re-renders the component.
+
+UI updates with new state.
+
+Example:
+
+<button onClick={() => setCount(count + 1)}>
+  Increase
+</button>
+
+
+Every click → new render.
+
+🤔 Why React Uses State?
+
+Because UI should be dynamic.
+
+Without state, UI is static.
+
+State enables:
+
+✔ Filtering lists
+✔ Search
+✔ Buttons / toggles
+✔ Forms
+✔ Conditional rendering
+✔ API data updates
+
+State = React's way of telling:
+
+“Whenever this value changes, re-render the UI.”
+
+⚛🧠 6. React Fiber Architecture
+
+Fiber = New engine behind React (since React 16).
+It makes React fast, interruptible, and better at updating UI.
+
+Why React needed Fiber?
+
+Old React used a blocking render.
+If the UI was big → browser froze.
+
+Fiber introduces:
+
+✔ Reconciliation split into small pieces
+
+React can pause work → do something urgent → resume work.
+
+✔ Prioritization
+
+High priority tasks (button click) get processed first.
+Low priority tasks (large list updates) later.
+
+✔ Better animations & responsiveness
+✔ Better error handling
+✔ Basis for Concurrent Mode (React 18 features)
+
+Fiber = “React’s brain rewrite” → enables smooth UI even with heavy components.
+
+🎯 Quick Summary (Episode 5 Notes)
+Component Files
+
+Separate file = clean, modular, reusable.
+
+JS vs JSX
+
+JSX allows HTML-like syntax inside JS.
+
+Both .js and .jsx work.
+
+Imports & Exports
+
+export default → one per file, no brackets while importing.
+
+export → many per file, import using {}.
+
+React Hooks
+
+Add dynamic behavior to functional components.
+
+useState
+
+Stores dynamic values.
+
+Returns [value, setter].
+
+Calling setter triggers re-render.
+
+React Fiber
+
+New architecture for fast, asynchronous, prioritized rendering.
+
+Improves UI performance.
